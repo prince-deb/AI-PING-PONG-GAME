@@ -86,7 +86,10 @@ if(game_status=="start");
    //function move call which in very important
     move();
 }
-
+function preload(){
+  ball_touch=loadSound("ball_touch_paddle.wav");
+  ball_missed=loadSound("missed.wav");
+}
 
 
 //function reset when ball does notcame in the contact of padde
@@ -140,9 +143,11 @@ function move(){
   if (ball.x-2.5*ball.r/2< 0){
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
+    ball_touch.play();
   }
   else{
     pcscore++;
+    ball_missed.play();
     reset();
     navigator.vibrate(100);
   }
